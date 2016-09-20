@@ -45,6 +45,13 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6f9ff', end
 
 /* Estilos APP */
 
+.keyboard-open .tabs{
+  display:none;
+  }
+.keyboard-open .has-tabs{
+ bottom:0;
+ }
+
 
 .fondo-inicio{
   background-image: url("../img/fondo.jpg");
@@ -98,4 +105,20 @@ filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d6f9ff', end
   font-size:20px;
 }
 
+.boton-grabar{
+  margin:10px 16%;
+  width:65%;
+  font-family: 'Indie Flower', cursive;
+}
 
+
+/*MEDIA QUERIES*/
+
+
+@media (max-width: 780px) and (orientation: landscape){
+
+  .boton-grabar{
+    margin: 2px 16%;
+  }
+
+}

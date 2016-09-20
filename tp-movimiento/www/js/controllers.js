@@ -99,7 +99,6 @@ angular.module('starter.controllers', [])
       if(btn == 'btnIzquierda'){
 
         $scope.audioIzq.stopRecord();
-        alert($scope.X);
 
       }
 

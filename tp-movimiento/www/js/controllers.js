@@ -1,6 +1,66 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, $ionicPlatform, $cordovaMedia, $timeout) {
+.controller('DashCtrl', function($scope, $ionicPlatform, $cordovaMedia, $timeout, $cordovaDeviceMotion) {
+
+  $scope.arrayPlay = {Izquierda: 1, Derecha: 1, Abajo: 1, Arriba: 1, Acostado: 1};
+
+  $ionicPlatform.ready(function() {
+    
+    var options = { frequency: 1000 };
+
+        var watch = $cordovaDeviceMotion.watchAcceleration(options);
+        watch.then(
+          null,
+          function(error) {
+          alert("No se puede tomar coordenadas desde ordenador");
+          },
+          function(result) {
+            $scope.X = parseInt(result.x);
+            $scope.Y = parseInt(result.y);
+            $scope.Z = parseInt(result.z);
+            $scope.tiempo = result.timestamp;
+
+            if($scope.X > 4 && $scope.audioIzq != null && $scope.arrayPlay["Izquierda"] == 1){
+
+              $scope.audioIzq.play();
+              $scope.arrayPlay = {Izquierda: 0, Derecha: 1, Abajo: 1, Arriba: 1, Acostado: 1};
+
+            }
+
+            if($scope.X < -4 && $scope.audioDer != null && $scope.arrayPlay["Derecha"] == 1){
+
+              $scope.audioDer.play();
+              $scope.arrayPlay = {Izquierda: 1, Derecha: 0, Abajo: 1, Arriba: 1, Acostado: 1};
+
+            }
+
+            if($scope.Y > 5 && $scope.audioArriba != null && $scope.arrayPlay["Arriba"] == 1){
+
+              $scope.audioArriba.play();
+              $scope.arrayPlay = {Izquierda: 1, Derecha: 1, Abajo: 1, Arriba: 0, Acostado: 1};
+
+            }
+
+            if($scope.Z > 8 && $scope.audioAcostado != null && $scope.arrayPlay["Acostado"] == 1){
+
+              $scope.audioAcostado.play();
+              $scope.arrayPlay = {Izquierda: 1, Derecha: 1, Abajo: 1, Arriba: 1, Acostado: 0};
+
+            }
+
+            if($scope.Z < -7 && $scope.audioAbajo != null && $scope.arrayPlay["Abajo"] == 1){
+
+              $scope.audioAbajo.play();
+              $scope.arrayPlay = {Izquierda: 1, Derecha: 1, Abajo: 0, Arriba: 1, Acostado: 1};
+
+            }
+
+
+        });
+
+    })
+
+
 
   $scope.AudioIzquierda = function(){
 
@@ -33,6 +93,7 @@ angular.module('starter.controllers', [])
       if(btn == 'btnIzquierda'){
 
         $scope.audioIzq.stopRecord();
+        alert($scope.X);
 
       }
 
@@ -66,21 +127,6 @@ angular.module('starter.controllers', [])
     }
   }
 
-  $scope.ReproducirIzquierda = function(){
-
-    $ionicPlatform.ready(function(){
-      try{
-
-        $scope.audioIzq.play();
-
-      } catch(ex){
-
-          alert(ex);
-
-      }
-    });
-  }
-
   $scope.AudioDerecha = function(){
     
     $ionicPlatform.ready(function() {
@@ -97,21 +143,6 @@ angular.module('starter.controllers', [])
       
     });
 
-  }
-
-  $scope.ReproducirDerecha = function(){
-
-    $ionicPlatform.ready(function(){
-      try{
-
-        $scope.audioDer.play();
-
-      } catch(ex){
-
-          alert(ex);
-
-      }
-    });
   }
 
 
@@ -134,21 +165,6 @@ angular.module('starter.controllers', [])
 
   }
 
-  $scope.ReproducirAbajo = function(){
-
-    $ionicPlatform.ready(function(){
-      try{
-
-        $scope.audioAbajo.play();
-
-      } catch(ex){
-
-          alert(ex);
-
-      }
-    });
-  }
-
 
   $scope.AudioArriba = function(){
     
@@ -168,22 +184,6 @@ angular.module('starter.controllers', [])
 
   }
 
-  $scope.ReproducirArriba = function(){
-
-    $ionicPlatform.ready(function(){
-      try{
-
-        $scope.audioArriba.play();
-
-      } catch(ex){
-
-          alert(ex);
-
-      }
-    });
-  }
-
-
   $scope.AudioAcostado = function(){
     
     $ionicPlatform.ready(function() {
@@ -200,21 +200,6 @@ angular.module('starter.controllers', [])
       
     });
 
-  }
-
-  $scope.ReproducirAcostado = function(){
-
-    $ionicPlatform.ready(function(){
-      try{
-
-        $scope.audioAcostado.play();
-
-      } catch(ex){
-
-          alert(ex);
-
-      }
-    });
   }
 
 

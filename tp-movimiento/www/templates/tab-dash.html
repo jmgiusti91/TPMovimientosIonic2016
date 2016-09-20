@@ -1,18 +1,25 @@
-<ion-view view-title="Dashboard">
-  <ion-content class="padding">
+<ion-view view-title="MovSense">
+  <ion-content class="padding fondo-inicio">
     
-    <button class="button button-calm" on-long-press="AudioIzquierda()" on-touch-end="Detener('btnIzquierda')">Grabar Audio Izquierda</button>
+    <div class="div-ingreso" ng-hide="Ingresar">
+      <h2 class="titulo-ingreso">Por favor, Indicanos tu nombre.</h2>
+      <input type="text" class="text-ingreso" ng-model="usuario.nombre" placeholder="Ingresalo Aqui :)">
+      <button class="button button-assertive boton-ingreso" ng-click="Empezar()" ng-disabled="!usuario.nombre">Continuar</button>
+
+    </div>
+
+    <button class="button button-calm" on-long-press="AudioIzquierda()" on-touch-end="Detener('btnIzquierda')" ng-show="Ingresar">Grabar Audio Izquierda</button>
     <br><br><br>
 
-    <button class="button button-calm" on-long-press="AudioDerecha()" on-touch-end="Detener('btnDerecha')">Grabar Audio Derecha</button>
+    <button class="button button-calm" on-long-press="AudioDerecha()" on-touch-end="Detener('btnDerecha')" ng-show="Ingresar">Grabar Audio Derecha</button>
     <br><br><br>
 
-    <button class="button button-calm" on-long-press="AudioAbajo()" on-touch-end="Detener('btnAbajo')">Grabar Audio Abajo</button>
+    <button class="button button-calm" on-long-press="AudioAbajo()" on-touch-end="Detener('btnAbajo')" ng-show="Ingresar">Grabar Audio Abajo</button>
     <br><br><br>
 
-    <button class="button button-calm" on-long-press="AudioArriba()" on-touch-end="Detener('btnArriba')">Grabar Audio Arriba</button>
+    <button class="button button-calm" on-long-press="AudioArriba()" on-touch-end="Detener('btnArriba')" ng-show="Ingresar">Grabar Audio Arriba</button>
     <br><br><br>
 
-    <button class="button button-calm" on-long-press="AudioAcostado()" on-touch-end="Detener('btnAcostado')">Grabar Audio Acostado</button>
+    <button class="button button-calm" on-long-press="AudioAcostado()" on-touch-end="Detener('btnAcostado')" ng-show="Ingresar">Grabar Audio Acostado</button>
   </ion-content>
 </ion-view>

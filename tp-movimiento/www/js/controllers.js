@@ -4,6 +4,12 @@ angular.module('starter.controllers', [])
 
   $scope.arrayPlay = {Izquierda: 1, Derecha: 1, Abajo: 1, Arriba: 1, Acostado: 1};
 
+  $scope.Ingresar = false;
+
+  $scope.Empezar = function(){
+    $scope.Ingresar = true;
+  }
+
   $ionicPlatform.ready(function() {
     
     var options = { frequency: 1000 };
